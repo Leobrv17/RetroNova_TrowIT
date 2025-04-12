@@ -7,11 +7,11 @@ class Cursor():
         if self.color == "B":  
             self.x = 1920 / 4 - self.size/2
             self.y = 1080 / 2 - self.size/2
-            image_name = "./assets/ThrowIt!/cursorB.png"
+            image_name = "./games/game1/assets/ThrowIt!/cursorB.png"
         else:
             self.x = (1920 / 4) * 3 - self.size/2
             self.y = 1080 / 2 - self.size/2
-            image_name = "./assets/ThrowIt!/cursorR.png"
+            image_name = "./games/game1/assets/ThrowIt!/cursorR.png"
             
         self.image = pygame.image.load(image_name).convert_alpha()
         self.image = pygame.transform.scale(self.image, (self.size, self.size))

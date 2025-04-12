@@ -32,7 +32,7 @@ class Target():
             self.speed = 4
         
         random_number = random.randint(1, 10)
-        image_name = f"./assets/ThrowIt!/viking/bouclier{random_number}.png"
+        image_name = f"./games/game1/assets/ThrowIt!/viking/bouclier{random_number}.png"
         self.image = pygame.image.load(image_name).convert_alpha()
         self.image = pygame.transform.scale(self.image, (self.size, self.size))
 

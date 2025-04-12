@@ -2,7 +2,7 @@ import pygame
 
 class Good():
     def __init__(self, x, y, time):
-        self.good = pygame.image.load("./assets/ThrowIt!/good.png").convert_alpha()
+        self.good = pygame.image.load("./games/game1/assets/ThrowIt!/good.png").convert_alpha()
         self.good = pygame.transform.scale(self.good, (100, 100))
         self.x = x
         self.y = y

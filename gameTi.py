@@ -82,7 +82,7 @@ class GameTi():
                 keys = pygame.key.get_pressed()
 
                 if not self.isPlayedV:
-                    self.music.load_music("./sound/vikingMusic.mp3")
+                    self.music.load_music("./games/game1/sound/vikingMusic.mp3")
                     self.music.play_music()
                     self.isPlayedV = True
                     self.isPlayedM = False

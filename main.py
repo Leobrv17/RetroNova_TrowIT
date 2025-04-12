@@ -7,9 +7,9 @@ from sound import Sound
 def main(window, twoPlayer):
 
     music = Sound()
-    music.load_sound("ground", "./sound/touchGround.mp3")
-    music.load_sound("wood", "./sound/touchWood.mp3")
-    music.load_sound("throw", "./sound/throw.mp3")
+    music.load_sound("ground", "./games/game1/sound/touchGround.mp3")
+    music.load_sound("wood", "./games/game1/sound/touchWood.mp3")
+    music.load_sound("throw", "./games/game1/sound/throw.mp3")
 
     game = GameTi(window, music, twoPlayer)
 

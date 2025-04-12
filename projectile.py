@@ -15,11 +15,11 @@ class Projectile():
         if self.color == "B":
             self.x = -156
             self.y = 277
-            image_name = "./assets/ThrowIt!/viking/projectileB.png"
+            image_name = "./games/game1/assets/ThrowIt!/viking/projectileB.png"
         else:
             self.x = 1920 + 156 - 500
             self.y = 277
-            image_name = "./assets/ThrowIt!/viking/projectileR.png"
+            image_name = "./games/game1/assets/ThrowIt!/viking/projectileR.png"
            
         self.baseX = self.x
         self.basey = self.y

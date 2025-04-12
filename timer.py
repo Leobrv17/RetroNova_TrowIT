@@ -7,7 +7,7 @@ class Timer:
         self.countdown_time = countdown_time  
         self.time_left = countdown_time
         self.running = False
-        self.font = pygame.font.Font("./fonts/Anton-Regular.ttf", 74)
+        self.font = pygame.font.Font("./games/game1/fonts/Anton-Regular.ttf", 74)
 
     def start(self):
         self.start_time = pygame.time.get_ticks()

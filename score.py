@@ -14,7 +14,7 @@ class Score():
         return self.value
     
     def show(self, screen, p1, p2):
-        font = pygame.font.Font("./fonts/Anton-Regular.ttf", 74)
+        font = pygame.font.Font("./games/game1/fonts/Anton-Regular.ttf", 74)
         
         scoreP1 = font.render(f'{p1.score.get()}', True, (173, 80, 173))
         scoreP2 = font.render(f'{p2.score.get()}', True, (173, 80, 173))

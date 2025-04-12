@@ -7,7 +7,7 @@ class Screen():
         
         self.window = window
         self.running = True
-        self.bgG = pygame.image.load("./assets/ThrowIt!/viking/terrain.png").convert()
+        self.bgG = pygame.image.load("./games/game1/assets/ThrowIt!/viking/terrain.png").convert()
 
         
     def run(self):
