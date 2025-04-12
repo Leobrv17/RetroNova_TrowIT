@@ -1,3 +1,5 @@
+import pygame
+import random
 from screen import Screen
 from target import Target
 from timer import Timer
@@ -6,9 +8,6 @@ from cursor import Cursor
 from sound import Sound
 from projectile import Projectile
 from qrCode import QrCode
-
-import pygame
-import random
 
 
 class GameTi():
@@ -20,18 +19,24 @@ class GameTi():
             joystick.init()
 
         self.twoPlayer = twoPlayer
+
+        # Remplacer les touches clavier par des axes et boutons de joystick
+        # Ces constantes seront utilisées pour vérifier les directions et boutons
+        self.JOYSTICK_AXIS_X = 0  # Axe horizontal
+        self.JOYSTICK_AXIS_Y = 1  # Axe vertical
+        self.SHOOT_BUTTON = 0  # Bouton 1 (index 0) pour tirer
+
+        # Conserver les touches clavier comme fallback
         self.p1Up = pygame.K_z
         self.p1Down = pygame.K_s
         self.p1Left = pygame.K_q
         self.p1Right = pygame.K_d
-
         self.p1shoot = pygame.K_e
 
         self.p2Up = pygame.K_o
         self.p2Down = pygame.K_l
         self.p2Left = pygame.K_k
         self.p2Right = pygame.K_m
-
         self.p2shoot = pygame.K_i
 
         self.buttonCoin1 = None
@@ -74,12 +79,39 @@ class GameTi():
         self.isPlayedV = False
         self.isPlayedM = True
 
+    def handle_joystick_input(self):
+        # Récupérer les états des joysticks
+        joystick_states = {
+            "p1_x": 0,
+            "p1_y": 0,
+            "p1_shoot": False,
+            "p2_x": 0,
+            "p2_y": 0,
+            "p2_shoot": False
+        }
+
+        # Vérifier si des joysticks sont connectés
+        if len(self.joysticks) > 0:
+            # Joystick du joueur 1
+            joystick_states["p1_x"] = self.joysticks[0].get_axis(self.JOYSTICK_AXIS_X)
+            joystick_states["p1_y"] = self.joysticks[0].get_axis(self.JOYSTICK_AXIS_Y)
+            joystick_states["p1_shoot"] = self.joysticks[0].get_button(self.SHOOT_BUTTON)
+
+            # Joystick du joueur 2 (s'il existe)
+            if len(self.joysticks) > 1 and self.twoPlayer:
+                joystick_states["p2_x"] = self.joysticks[1].get_axis(self.JOYSTICK_AXIS_X)
+                joystick_states["p2_y"] = self.joysticks[1].get_axis(self.JOYSTICK_AXIS_Y)
+                joystick_states["p2_shoot"] = self.joysticks[1].get_button(self.SHOOT_BUTTON)
+
+        return joystick_states
+
     def run(self):
         while self.screen.running:
             self.screen.run()
 
             if self.screen.state == "game":
                 keys = pygame.key.get_pressed()
+                joystick_input = self.handle_joystick_input()
 
                 if not self.isPlayedV:
                     self.music.load_music("./games/game1/sound/vikingMusic.mp3")
@@ -128,21 +160,27 @@ class GameTi():
 
                     if self.projectileB:
                         self.projectileB[0].run(self.screen.window, self.timer.getTimeLeft())
-                        if keys[self.p1shoot]:  # Use joystick button state
+                        # Utiliser le bouton du joystick pour tirer
+                        if joystick_input["p1_shoot"] or keys[self.p1shoot]:
                             self.player1.score.add(
                                 self.projectileB[0].shoot(self.cursor1.getPos(), self.timer.getTimeLeft(), self.music,
                                                           self.targets, self.posUsed))
                     if self.projectileR:
                         if self.twoPlayer:
                             self.projectileR[0].run(self.screen.window, self.timer.getTimeLeft())
-                            if keys[self.p2shoot]:  # Use joystick button state
+                            # Utiliser le bouton du joystick pour tirer
+                            if joystick_input["p2_shoot"] or keys[self.p2shoot]:
                                 self.player2.score.add(
                                     self.projectileR[0].shoot(self.cursor2.getPos(), self.timer.getTimeLeft(),
                                                               self.music, self.targets, self.posUsed))
 
-                    self.cursor1.run(self.screen.window)
+                    # Mise à jour des curseurs avec les entrées joystick
+                    self.cursor1.handle_joystick(joystick_input["p1_x"], joystick_input["p1_y"])
+                    self.cursor1.show(self.screen.window)
+
                     if self.twoPlayer:
-                        self.cursor2.run(self.screen.window)
+                        self.cursor2.handle_joystick(joystick_input["p2_x"], joystick_input["p2_y"])
+                        self.cursor2.show(self.screen.window)
 
                 if self.timer.getTimeLeft() == -2:
                     self.screen.state = "ending"
