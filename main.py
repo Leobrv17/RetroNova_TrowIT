@@ -4,14 +4,14 @@ import pygame
 from gameTi import GameTi
 from sound import Sound
 
-def main(screen, twoPlayer):
+def main(window, twoPlayer):
 
     music = Sound()
     music.load_sound("ground", "./sound/touchGround.mp3")
     music.load_sound("wood", "./sound/touchWood.mp3")
     music.load_sound("throw", "./sound/throw.mp3")
 
-    game = GameTi(screen, music, twoPlayer)
+    game = GameTi(window, music, twoPlayer)
 
     while game.screen.running and game.screen.state == "game":
         game.run()
@@ -29,7 +29,6 @@ def main(screen, twoPlayer):
 
 
 if __name__ == "__main__":
-    from screen import Screen
-    screen = Screen()
-    score_p1, score_p2 = main(screen, True)
+    window = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
+    score_p1, score_p2 = main(window, True)
     print(f"Score Joueur 1 : {score_p1}, Score Joueur 2 : {score_p2}")

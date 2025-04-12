@@ -1,11 +1,11 @@
 import pygame
 
 class Screen():
-    def __init__(self):
+    def __init__(self, window):
         pygame.init()
         pygame.display.set_caption("FirstLAP")
         
-        self.screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
+        self.window = window
         self.running = True
         self.bgG = pygame.image.load("./assets/ThrowIt!/viking/terrain.png").convert()
 
@@ -19,5 +19,5 @@ class Screen():
 
 
     def gameScreen(self):
-        self.screen.blit(self.bgG, (0, 0))
+        self.window.blit(self.bgG, (0, 0))
 

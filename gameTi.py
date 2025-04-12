@@ -12,7 +12,7 @@ import random
 
 
 class GameTi():
-    def __init__(self, screen, music, twoPlayer: bool):
+    def __init__(self, window, music, twoPlayer: bool):
         pygame.joystick.init()
 
         self.joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
@@ -20,10 +20,10 @@ class GameTi():
             joystick.init()
 
         self.twoPlayer = twoPlayer
-        self.p1Up = pygame.K_r
-        self.p1Down = pygame.K_f
-        self.p1Left = pygame.K_d
-        self.p1Right = pygame.K_g
+        self.p1Up = pygame.K_z
+        self.p1Down = pygame.K_s
+        self.p1Left = pygame.K_q
+        self.p1Right = pygame.K_d
 
         self.p1shoot = pygame.K_e
 
@@ -37,7 +37,7 @@ class GameTi():
         self.buttonCoin1 = None
         self.buttonCoin2 = None
 
-        self.screen = screen
+        self.screen = Screen(window=window)
         self.screen.state = "game"
         self.player1 = Player()
         self.player2 = Player()
@@ -65,7 +65,7 @@ class GameTi():
             15: [1309, 548]
         }
 
-        self.durationOfGame = 150
+        self.durationOfGame = 50
         self.timer = Timer(self.durationOfGame)
         self.timer.stop()
         self.last_target_time = self.durationOfGame
@@ -90,7 +90,7 @@ class GameTi():
                 if not self.timer.running:
                     self.timer.start()
 
-                self.timer.update(self.screen.screen, True)
+                self.timer.update(self.screen.window, True)
 
                 if self.timer.getTimeLeft() > 0:
                     if not self.projectileB:
@@ -106,7 +106,7 @@ class GameTi():
                         if target.should_destroy(self.timer.getTimeLeft()):
                             self.targets.remove(target)
                             self.posUsed.remove(self.posUsed[0])
-                        target.run(self.screen.screen)
+                        target.run(self.screen.window)
 
                     if self.timer.running and self.last_target_time - current_time >= 1:
                         self.last_target_time = current_time
@@ -127,22 +127,22 @@ class GameTi():
                         self.projectileR.remove(self.projectileR[0])
 
                     if self.projectileB:
-                        self.projectileB[0].run(self.screen.screen, self.timer.getTimeLeft())
+                        self.projectileB[0].run(self.screen.window, self.timer.getTimeLeft())
                         if keys[self.p1shoot]:  # Use joystick button state
                             self.player1.score.add(
                                 self.projectileB[0].shoot(self.cursor1.getPos(), self.timer.getTimeLeft(), self.music,
                                                           self.targets, self.posUsed))
                     if self.projectileR:
                         if self.twoPlayer:
-                            self.projectileR[0].run(self.screen.screen, self.timer.getTimeLeft())
+                            self.projectileR[0].run(self.screen.window, self.timer.getTimeLeft())
                             if keys[self.p2shoot]:  # Use joystick button state
                                 self.player2.score.add(
                                     self.projectileR[0].shoot(self.cursor2.getPos(), self.timer.getTimeLeft(),
                                                               self.music, self.targets, self.posUsed))
 
-                    self.cursor1.run(self.screen.screen)
+                    self.cursor1.run(self.screen.window)
                     if self.twoPlayer:
-                        self.cursor2.run(self.screen.screen)
+                        self.cursor2.run(self.screen.window)
 
                 if self.timer.getTimeLeft() == -2:
                     self.screen.state = "ending"
