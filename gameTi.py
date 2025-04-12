@@ -24,7 +24,7 @@ class GameTi():
         # Ces constantes seront utilisées pour vérifier les directions et boutons
         self.JOYSTICK_AXIS_X = 0  # Axe horizontal
         self.JOYSTICK_AXIS_Y = 1  # Axe vertical
-        self.SHOOT_BUTTON = 0  # Bouton 1 (index 0) pour tirer
+        self.SHOOT_BUTTON = 2  # Bouton 1 (index 0) pour tirer
 
         # Conserver les touches clavier comme fallback
         self.p1Up = pygame.K_z
