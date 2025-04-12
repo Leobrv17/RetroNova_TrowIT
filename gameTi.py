@@ -22,9 +22,9 @@ class GameTi():
 
         # Remplacer les touches clavier par des axes et boutons de joystick
         # Ces constantes seront utilisées pour vérifier les directions et boutons
-        self.JOYSTICK_AXIS_X = 0  # Axe horizontal
-        self.JOYSTICK_AXIS_Y = 1  # Axe vertical
-        self.SHOOT_BUTTON = 2  # Bouton 1 (index 0) pour tirer
+        self.JOYSTICK_AXIS_X = 1  # Axe horizontal
+        self.JOYSTICK_AXIS_Y = 0  # Axe vertical
+        self.SHOOT_BUTTON = 5  # Bouton 1 (index 0) pour tirer
 
         # Conserver les touches clavier comme fallback
         self.p1Up = pygame.K_z
