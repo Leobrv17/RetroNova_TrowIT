@@ -57,6 +57,9 @@ class Cursor():
         self.limit_position()
 
     def handle_joystick(self, axis_x, axis_y):
+        # Inverser l'axe X en multipliant par -1
+        axis_x = -axis_x
+
         # Gérer les mouvements du joystick en tenant compte de la zone morte
         if abs(axis_x) > self.joystick_deadzone:
             self.x += self.speed * axis_x
