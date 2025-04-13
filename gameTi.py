@@ -68,7 +68,7 @@ class GameTi():
             15: [1309, 548]
         }
 
-        self.durationOfGame = 50
+        self.durationOfGame = 100
         self.timer = Timer(self.durationOfGame)
         self.timer.stop()
         self.last_target_time = self.durationOfGame
