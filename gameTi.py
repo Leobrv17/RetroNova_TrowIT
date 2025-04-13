@@ -5,9 +5,7 @@ from target import Target
 from timer import Timer
 from player import Player
 from cursor import Cursor
-from sound import Sound
 from projectile import Projectile
-from qrCode import QrCode
 
 
 class GameTi():
@@ -22,7 +20,7 @@ class GameTi():
 
         # Remplacer les touches clavier par des axes et boutons de joystick
         # Ces constantes seront utilisées pour vérifier les directions et boutons
-        self.JOYSTICK_AXIS_X = 1  # Axe horizontal
+        self.JOYSTICK_AXIS_X = -1  # Axe horizontal
         self.JOYSTICK_AXIS_Y = 0  # Axe vertical
         self.SHOOT_BUTTON = 5  # Bouton 1 (index 0) pour tirer
 
@@ -182,7 +180,7 @@ class GameTi():
                         self.cursor2.handle_joystick(joystick_input["p2_x"], joystick_input["p2_y"])
                         self.cursor2.show(self.screen.window)
 
-                if self.timer.getTimeLeft() == -2:
+                if self.timer.getTimeLeft() == -1:
                     self.screen.state = "ending"
 
             pygame.display.update()
